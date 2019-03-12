@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             ".png", /* extention */
             storageDir /* directory */
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
         }
     }
@@ -64,7 +63,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val imageBitmap: Bitmap?
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            imageBitmap = handleSamplingAndRotationBitmap(this, Uri.fromFile(File(currentPhotoPath)))
+            imageBitmap = handleSamplingAndRotationBitmap(
+                this,
+                Uri.fromFile(File(currentPhotoPath)))
             imageBitmap?.let {
                 imageView.setImageBitmap(it)
             }
